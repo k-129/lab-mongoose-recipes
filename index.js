@@ -38,10 +38,20 @@ const manageRecipes = async () => {
     let recepies = data
     await Recipe.insertMany(recepies);
 
+    let allRecipes = await Recipe.find();
+
+    let titles = [];
+    for (let i = 0; i < allRecipes.length; i++){
+      titles.push(allRecipes[i].title);
+    }
+    console.log(titles);
+    
     //update the recipe
     let updateRecipe = await Recipe.findOneAndUpdate({title: 'Rigatoni alla Genovese'}, {duration: 100}
     )
     console.log(updateRecipe);
+    console.log('Success Message');
+  
 
     //deleted the recipe
     let deleteRecipe = await Recipe.deleteOne({title: 'Carrot Cake'});
